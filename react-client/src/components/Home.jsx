@@ -16,10 +16,12 @@ class Home extends React.Component {
       library: [],
       explore: [],
       preview: ['default', 'https://drive.google.com/open?id=0BxlVLOVlVGhdNE9rWllHNENBekk'],
+      sort: ''
     }
     this.previewCallback = this.previewCallback.bind(this);
     this.searchCallback = this.searchCallback.bind(this);
     this.refreshExplore = this.refreshExplore.bind(this);
+    this.sortCallback = this.sortCallback.bind(this);
   };
 
   componentDidMount() {
@@ -41,6 +43,9 @@ class Home extends React.Component {
         library: initialExplore
       })
     });
+
+    this.props.onRef(this)
+
   };
 
   refreshExplore() {
@@ -77,9 +82,13 @@ class Home extends React.Component {
         explore: this.state.library
       })
     }
-
   };
 
+  sortCallback(str) {
+    this.setState({
+      sort: str
+    }, () => console.log('Sort', this.state.sort))
+  }
 
   render() {
     return (
@@ -94,10 +103,10 @@ class Home extends React.Component {
     <div classID="explore">
       <h3>Explore Designs</h3>
         <div classID="search">
-          <Search cb={this.searchCallback} />
+          <Search searchcb={this.searchCallback} sortcb={this.sortCallback}/><br></br>
         </div>
 
-      <Explore items={this.state.explore} preview={this.previewCallback} className="exploreBox"/>
+      <Explore items={this.state.explore} preview={this.previewCallback} sort={this.state.sort} className="exploreBox"/>
     </div>
 
     <div classID="preview">

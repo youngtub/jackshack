@@ -14,8 +14,7 @@ class App extends React.Component {
       uid:'',
       showSignup: false,
       showLogin: false,
-      showSubmitGraphics: false,
-      needToRefreshExplore: true
+      showSubmitGraphics: false
     }
 //bindings
 this.showSignUp = this.showSignUp.bind(this);
@@ -60,9 +59,9 @@ loginCallback(name, id) {
 
 submitGraphicsCallback() {
   this.setState({
-    showSubmitGraphics: false,
-    needToRefreshExplore: true
+    showSubmitGraphics: false
   })
+  this.child.refreshExplore();
 }
 
   render() {
@@ -97,7 +96,7 @@ submitGraphicsCallback() {
 
 
         <div classID="home">
-          <Home refresh={this.state.needToRefreshExplore}/>
+          <Home onRef={ref => (this.child = ref)}/>
         </div>
       </div>
     )

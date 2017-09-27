@@ -14,10 +14,24 @@ const Explore = (props) => {
     props.preview(attr);
   }
 
+  const setSortFunction = (props) => {
+    let output;
+    if (props.sort === 'Recent') {
+      output = (a,b) => new Date(b.created_at) - new Date(a.created_at);
+    } else if (props.sort === 'Classics') {
+      output = (a,b) => new Date(a.created_at) - new Date(b.created_at);
+    } else if (props.sort === 'Popular') {
+      output = (a,b) => (b.view_count) - (a.view_count);
+    } else if (props.sort === 'Underground') {
+      output = (a,b) => (a.view_count) - (b.view_count);
+    }
+    return output;
+  }
+
   return (
     <div>
       <div className="exploreContainer" style={exploreContainer}>
-        {props.items.sort((a,b) => new Date(b.created_at) - new Date(a.created_at)).map((entry) => (
+        {props.items.sort(setSortFunction(props)).map((entry) => (
           <img src={getIdfromUrl(entry.link)} onClick={setPreviewImage} height={140} width={140} style={exploreStyle} key={entry.link.slice(33)}/>
         ))}
       </div>
@@ -33,10 +47,13 @@ const exploreContainer = {
   border: "solid black 1px",
   borderRadius: "70px",
   margin: "auto",
-  width: "39%",
-  padding: "10px",
+  marginLeft: "30px",
+  width: "34%",
+  padding: "20px",
   display: "inline block",
-  float: "left"
+  float: "left",
+  height: "500px",
+  overflow: "scroll"
 }
 
 
