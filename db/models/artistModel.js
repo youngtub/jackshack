@@ -4,6 +4,7 @@ const sequelize = require('../../db');
 const Artist = sequelize.define('artists', {
   name: Sequelize.STRING,
   email: Sequelize.STRING,
+  password: Sequelize.STRING,
   score: Sequelize.FLOAT
 });
 
