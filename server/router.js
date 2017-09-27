@@ -17,4 +17,6 @@ router.post('/signup', signup.handleSignUp);
 
 router.post('/login', login.handleLogin);
 
+router.post('/submitgraphic', submit.handleSubmit);
+
 module.exports = router;

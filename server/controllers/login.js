@@ -7,14 +7,15 @@ const axios = require('axios');
 exports.handleLogin = (req, res) => {
 
 var account = artists.findAll({
+  attributes: ['id'],
   where: {
     name: req.body.name,
     password: req.body.password
   }
 })
-.then( (data) => {
-  if (!data) res.send('Incorrect credentials, try again')
-  else res.send('Ok you can log in')
+.then( (id) => {
+  if (!id) res.send('Incorrect credentials, try again')
+  else res.send(JSON.stringify(id[0].dataValues.id));
 })
 
 }

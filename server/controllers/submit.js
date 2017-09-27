@@ -5,6 +5,16 @@ const artists = require('../../db/models/artistModel');
 const parser = require('body-parser');
 const axios = require('axios');
 
-exports.handleSignUp = (req, res) => {
-
+exports.handleSubmit = (req, res) => {
+  graphics.create({
+    title: req.body.title,
+    link: req.body.url,
+    total_rating: 0,
+    number_of_ratings: 0,
+    avg_rating: 0,
+    view_count: 0,
+    created_at: new Date(),
+    artistId: req.body.artist
+  })
+  .then( () => res.send('Ok'))
 }

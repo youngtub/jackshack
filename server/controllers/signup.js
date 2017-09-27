@@ -20,5 +20,13 @@ exports.handleSignUp = (req, res) => {
     email: req.body.password,
     score: 0
   })
-  .then( () => res.send('successfully created account!'))
+  .then( () => {
+    var userid = artists.findAll({
+      attributes: ['id'],
+      where: {
+        name: req.body.name
+      }
+    })
+    .then( (id) => res.send(JSON.stringify(id[0].dataValues.id)))
+  })
 }

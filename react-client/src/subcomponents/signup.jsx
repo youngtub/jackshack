@@ -41,8 +41,8 @@ class Signup extends React.Component {
       email: this.state.email
     })
     .then( (res) => {
-      console.log(res);
-      this.props.cb(this.state.username)
+      //res is the users id
+      this.props.cb(this.state.username, res.data)
     });
   }
 

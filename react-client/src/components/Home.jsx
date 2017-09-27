@@ -19,6 +19,7 @@ class Home extends React.Component {
     }
     this.previewCallback = this.previewCallback.bind(this);
     this.searchCallback = this.searchCallback.bind(this);
+    this.refreshExplore = this.refreshExplore.bind(this);
   };
 
   componentDidMount() {
@@ -42,11 +43,23 @@ class Home extends React.Component {
     });
   };
 
+  refreshExplore() {
+    console.log('I got called');
+    axios.get('/api/explore')
+    .then( (res) => {
+      this.setState({
+        explore: res.data,
+        library: res.data
+      })
+    });
+  }
+
   previewCallback(imgurl) {
     axios.post('/api/getdetails', {link: imgurl})
     .then( (res) => {
+      console.log('res for preview', res)
       this.setState({
-        preview: [res.data[0].title, res.data[0].link]
+        preview: res.data
       })
     })
   };
@@ -83,12 +96,12 @@ class Home extends React.Component {
         <div classID="search">
           <Search cb={this.searchCallback} />
         </div>
-        
+
       <Explore items={this.state.explore} preview={this.previewCallback} className="exploreBox"/>
     </div>
 
     <div classID="preview">
-      <Preview img={this.state.preview}/>
+      <Preview details={this.state.preview} />
     </div>
 
   </div>

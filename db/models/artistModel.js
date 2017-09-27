@@ -2,6 +2,11 @@ const Sequelize = require('Sequelize');
 const sequelize = require('../../db');
 
 const Artist = sequelize.define('artists', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   name: Sequelize.STRING,
   email: Sequelize.STRING,
   password: Sequelize.STRING,

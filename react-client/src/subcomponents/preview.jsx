@@ -8,9 +8,10 @@ const Preview = (props) => {
       <h3 style={alignHeader}> Preview your shirt here</h3>
       <div className="previewContainer" style={divStyle}>
         <img src="https://teemill.com/uploaded/public/58344ea7d34955.11549832.png" height={500} width={400} />
-        <img src={`https://drive.google.com/uc?id=${props.img[1].slice(33)}`} height={100} width={100} style={overlayStyle} />
-        <i style={alignDescription}> "{props.img[0]}"</i>
-        <p style={alignDescription}> Artist name </p>
+        <img src={`https://drive.google.com/uc?id=${props.details[1].slice(33)}`} height={100} width={100} style={overlayStyle} />
+        <p style={alignDescription}> "{props.details[0]}"</p>
+        <p style={alignDescription}> By: {props.details[3]} </p>
+        <p style={alignDescription}> View Count: {props.details[2]} </p>
       </div>
 
     </div>
@@ -19,20 +20,20 @@ const Preview = (props) => {
 
 const divStyle = {
   position: "relative",
-  display: "inline block"
+  display: "inline block",
 };
 
 const overlayStyle = {
   position: "absolute",
   left: "150px",
-  bottom: "270px"
+  bottom: "370px"
 }
 
 const rightStyle = {
   border: "solid black 1px",
   borderRadius: "70px",
   margin: "auto",
-  width: "28%",
+  width: "26%",
   padding: "5px",
   float: "right"
 }
@@ -43,8 +44,7 @@ const alignHeader = {
 }
 
 const alignDescription = {
-  float: "right",
-  marginRight: "150px"
+  textAlign: "center"
 }
 
 export default Preview;

@@ -17,7 +17,7 @@ const Explore = (props) => {
   return (
     <div>
       <div className="exploreContainer" style={exploreContainer}>
-        {props.items.map((entry) => (
+        {props.items.sort((a,b) => new Date(b.created_at) - new Date(a.created_at)).map((entry) => (
           <img src={getIdfromUrl(entry.link)} onClick={setPreviewImage} height={140} width={140} style={exploreStyle} key={entry.link.slice(33)}/>
         ))}
       </div>

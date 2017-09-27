@@ -3,6 +3,7 @@ import Home from './Home.jsx';
 import axios from 'axios';
 import Signup from '../subcomponents/signup.jsx'
 import Login from '../subcomponents/login.jsx'
+import SubmitGraphics from '../subcomponents/submitGraphics.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -12,13 +13,18 @@ class App extends React.Component {
       username: '',
       uid:'',
       showSignup: false,
-      showLogin: false
+      showLogin: false,
+      showSubmitGraphics: false,
+      needToRefreshExplore: true
     }
 //bindings
 this.showSignUp = this.showSignUp.bind(this);
 this.showLogin = this.showLogin.bind(this);
+this.showSubmitGraphics = this.showSubmitGraphics.bind(this);
+
 this.signupCallback = this.signupCallback.bind(this);
 this.loginCallback = this.loginCallback.bind(this);
+this.submitGraphicsCallback = this.submitGraphicsCallback.bind(this);
   }
 
 //functions
@@ -30,19 +36,32 @@ showLogin() {
   this.setState({showLogin: true})
 }
 
-signupCallback(name) {
+showSubmitGraphics() {
+  this.setState({showSubmitGraphics: true})
+}
+
+signupCallback(name, id) {
   this.setState({
     username: name,
     isLoggedIn: true,
-    showSignup: false
+    showSignup: false,
+    uid: id
   })
 }
 
-loginCallback(name) {
+loginCallback(name, id) {
   this.setState({
     username: name,
     isLoggedIn: true,
-    showLogin: false
+    showLogin: false,
+    uid: id
+  }, () => console.log('APP state', this.state))
+}
+
+submitGraphicsCallback() {
+  this.setState({
+    showSubmitGraphics: false,
+    needToRefreshExplore: true
   })
 }
 
@@ -67,14 +86,18 @@ loginCallback(name) {
         {this.state.username !== '' ?
           <div style={rightStyle}>
             <div classID='usernameDisplay'> Hi, {this.state.username}</div>
-            <button>Submit your graphics here!</button>
+            <button onClick={this.showSubmitGraphics}>Submit your graphics here!</button>
           </div>
             : ''
         }
 
+        {this.state.showSubmitGraphics ?
+          <SubmitGraphics artist={this.state.uid} style={rightStyle} cb={this.submitGraphicsCallback}/> : ''
+        }
+
 
         <div classID="home">
-          <Home/>
+          <Home refresh={this.state.needToRefreshExplore}/>
         </div>
       </div>
     )

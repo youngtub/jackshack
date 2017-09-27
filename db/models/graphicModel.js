@@ -20,6 +20,8 @@ const Graphic = sequelize.define('graphics', {
   timestamps: false
 })
 
+Graphic.belongsTo(Artist);
+
 Graphic.sync({ force: false })
   .then(() => {
     console.log('Graphics table created');
@@ -27,7 +29,6 @@ Graphic.sync({ force: false })
   .catch( (err) => console.error('In graphics table', err));
 
 // for (var key in linksObj) {
-//   console.log(linksObj[key]);
 //   Graphic.create({
 //     title: key,
 //     link: linksObj[key],
@@ -35,7 +36,7 @@ Graphic.sync({ force: false })
 //     number_of_ratings: 0,
 //     avg_rating: 0,
 //     view_count: 0,
-//     created_at: new Date()
+//     created_at: new Date(),
 //   })
 // }
 
