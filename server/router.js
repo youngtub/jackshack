@@ -10,5 +10,6 @@ router.get('/showcase', showcase.getAll);
 
 router.get('/explore', explore.getAll);
 
+router.post('/getdetails', explore.getDetails)
 
 module.exports = router;

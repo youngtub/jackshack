@@ -5,6 +5,7 @@ import axios from 'axios';
 import Showcase from '../subcomponents/showcase.jsx'
 import Explore from '../subcomponents/explore.jsx'
 import Preview from '../subcomponents/preview.jsx'
+import Search from '../subcomponents/search.jsx'
 
 class Home extends React.Component {
 
@@ -12,10 +13,12 @@ class Home extends React.Component {
     super(props);
     this.state = {
       showcase: [],
+      library: [],
       explore: [],
-      preview: ''
+      preview: ['default', 'https://drive.google.com/open?id=0BxlVLOVlVGhdNE9rWllHNENBekk'],
     }
     this.previewCallback = this.previewCallback.bind(this);
+    this.searchCallback = this.searchCallback.bind(this);
   };
 
   componentDidMount() {
@@ -31,18 +34,39 @@ class Home extends React.Component {
     axios.get('/api/explore')
     .then( (res) => {
       console.log('explore data in home', res);
-      var currentExplore = res.data;
+      var initialExplore = res.data;
       this.setState({
-        explore: currentExplore
+        explore: initialExplore,
+        library: initialExplore
       })
     });
   };
 
   previewCallback(imgurl) {
-    this.setState({
-      preview: imgurl
+    axios.post('/api/getdetails', {link: imgurl})
+    .then( (res) => {
+      this.setState({
+        preview: [res.data[0].title, res.data[0].link]
+      })
     })
   };
+
+  searchCallback(str) {
+    if (str !== '') {
+      var searched = this.state.library.filter( (item) => {
+        return item.title.includes(str);
+      })
+      this.setState({
+        explore: searched
+      })
+    } else {
+      this.setState({
+        explore: this.state.library
+      })
+    }
+
+  };
+
 
   render() {
     return (
@@ -56,6 +80,10 @@ class Home extends React.Component {
 
     <div classID="explore">
       <h3>Explore Designs</h3>
+        <div classID="search">
+          <Search cb={this.searchCallback} />
+        </div>
+        
       <Explore items={this.state.explore} preview={this.previewCallback} className="exploreBox"/>
     </div>
 

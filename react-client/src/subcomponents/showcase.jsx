@@ -12,7 +12,6 @@ const Showcase = (props) => {
 
   const setPreviewImage = (e) => {
     var attr = $(e.target).attr('src')
-    console.log(attr)
     props.preview(attr);
   }
 
@@ -36,7 +35,7 @@ const showcaseContainer = {
   border: "solid black 1px",
   borderRadius: "70px",
   margin: "auto",
-  width: "50%",
+  width: "56%",
   padding: "10px"
 }
 
