@@ -70,8 +70,8 @@ submitGraphicsCallback() {
 
         {this.state.isLoggedIn ? '' :
         <div className="signupForm" style={rightStyle}>
-          <button onClick={this.showSignUp}>Sign up</button>
-          <button onClick={this.showLogin}>Log in</button>
+          <button onClick={this.showSignUp} style={buttonStyle}>Sign up</button>
+          <button onClick={this.showLogin} style={buttonStyle}>Log in</button>
         </div> }
 
         {this.state.showSignup ?
@@ -84,8 +84,8 @@ submitGraphicsCallback() {
 
         {this.state.username !== '' ?
           <div style={rightStyle}>
-            <div classID='usernameDisplay'> Hi, {this.state.username}</div>
-            <button onClick={this.showSubmitGraphics}>Submit your graphics here!</button>
+            <div classID='usernameDisplay' style={textAlign}> Hi, {this.state.username}!</div>
+            <button onClick={this.showSubmitGraphics} style={submitGraphicsButtonStyle}>Submit your graphics</button>
           </div>
             : ''
         }
@@ -106,6 +106,31 @@ submitGraphicsCallback() {
 
 const rightStyle = {
   float: "right"
+}
+
+const textAlign = {
+  textAlign: 'center',
+  fontSize: '17px'
+}
+
+const buttonStyle = {
+  float: "right",
+  backgroundColor: '#e7e7e7',
+  color: 'black',
+  width: '90px',
+  padding: '5px',
+  fontFamily: 'verdana',
+  fontSize: '16px'
+}
+
+const submitGraphicsButtonStyle = {
+  backgroundColor: "#6485ba",
+  color: 'black',
+  width: '180px',
+  padding: '5px',
+  fontFamily: 'verdana',
+  fontSize: '14px',
+  borderRadius: "75px"
 }
 
 export default App;

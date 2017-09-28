@@ -28,7 +28,8 @@ render() {
     return (
       <div className="searchContainer">
         <input type="text" onChange={this.handleSearchChange} value={this.state.search} placeholder='Search...' style={searchStyle}/>
-        <select value={this.state.sort} onChange={this.handleSortChange}>
+        <a style={sortBy}> Sort by: </a>
+        <select value={this.state.sort} onChange={this.handleSortChange} style={sortStyle}>
             <option> Recent </option>
             <option> Classics </option>
             <option> Popular </option>
@@ -48,6 +49,14 @@ const searchStyle = {
   border: "solid 1px #fff",
   boxShadow: "inset 1px 1px 2px 0 #707070",
   transition: "box-shadow 0.3s"
+}
+
+const sortBy = {
+  marginLeft: '5%'
+}
+
+const sortStyle = {
+  marginLeft: '1%'
 }
 
 export default Search;
