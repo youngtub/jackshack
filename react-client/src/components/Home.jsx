@@ -15,7 +15,7 @@ class Home extends React.Component {
       showcase: [],
       library: [],
       explore: [],
-      preview: ['default', 'https://drive.google.com/open?id=0BxlVLOVlVGhdNE9rWllHNENBekk'],
+      preview: ['default', 'https://drive.google.com/open?id=0BxlVLOVlVGhdNE9rWllHNENBekk', 0, 0, 0, 'demo, mock', 'JS'],
       sort: 'Recent',
       search: '',
       userid: 0
@@ -31,7 +31,7 @@ class Home extends React.Component {
   componentDidMount() {
     axios.get('/api/showcase')
     .then( (res) => {
-      console.log('showcase data in home', res);
+      console.log('showcase data in home', res.data);
       var currentShowcase = res.data;
       this.setState({
         showcase: currentShowcase
@@ -40,7 +40,7 @@ class Home extends React.Component {
 
     axios.get('/api/explore')
     .then( (res) => {
-      console.log('explore data in home', res);
+      console.log('explore data in home', res.data);
       var initialExplore = res.data;
       this.setState({
         explore: initialExplore,
@@ -65,6 +65,7 @@ class Home extends React.Component {
   previewCallback(imgurl) {
     axios.post('/api/getdetails', {link: imgurl})
     .then( (res) => {
+      console.log('For Preview: ', res.data)
       this.setState({
         preview: res.data
       })
@@ -132,7 +133,7 @@ class Home extends React.Component {
     </div>
 
     <div classID="preview">
-      <Preview details={this.state.preview} userselectcb={this.userSelectCallback} refresh={this.previewCallback}/>
+      <Preview details={this.state.preview} userselectcb={this.userSelectCallback} refresh={this.previewCallback} auth={this.props.auth}/>
     </div>
 
   </div>

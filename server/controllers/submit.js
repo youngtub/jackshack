@@ -6,6 +6,7 @@ const parser = require('body-parser');
 const axios = require('axios');
 
 exports.handleSubmit = (req, res) => {
+  var tagsArray = req.body.tags.split(',');
   graphics.create({
     title: req.body.title,
     link: req.body.url,
@@ -14,7 +15,8 @@ exports.handleSubmit = (req, res) => {
     avg_rating: 0,
     view_count: 0,
     created_at: new Date(),
-    artistId: req.body.artist
+    artistId: req.body.artist,
+    tags: tagsArray
   })
   .then( () => res.send('Ok'))
 }

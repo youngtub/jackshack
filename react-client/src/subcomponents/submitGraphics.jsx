@@ -6,13 +6,15 @@ class SubmitGraphics extends React.Component {
     super(props);
     this.state = {
       img: '',
-      title: ''
+      title: '',
+      tags: ''
     }
     //bindings
     this.handleUrlChange = this.handleUrlChange.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.handleTagsChange = this.handleTagsChange.bind(this);
   }
   //functions
   handleUrlChange(e) {
@@ -32,12 +34,14 @@ class SubmitGraphics extends React.Component {
       axios.post('/api/submitgraphic', {
         url: this.state.img,
         artist: this.props.artist,
-        title: this.state.title
+        title: this.state.title,
+        tags: this.state.tags
       })
       .then( () => {
         this.setState({
           img: '',
-          title: ''
+          title: '',
+          tags: ''
         }, this.triggerCallback)
       })
     }
@@ -50,11 +54,17 @@ class SubmitGraphics extends React.Component {
     }, this.triggerCallback)
   }
 
+  handleTagsChange(e) {
+    this.setState({
+      tags: e.target.value
+    })
+  }
+
   triggerCallback() {
     this.props.cb(); //unbound
   }
 
-          // <p style={infoStyle}> `Submit a Google drive link (should look like this: https://drive.google.com/open?id=0BxlVLOVlVGhdMlY2YXloUC02d1k)`</p>
+    // <p style={infoStyle}> `Submit a Google drive link (should look like this: https://drive.google.com/open?id=0BxlVLOVlVGhdMlY2YXloUC02d1k)`</p>
 
   render() {
     return (
@@ -62,6 +72,7 @@ class SubmitGraphics extends React.Component {
       <div classID="submitGraphicsFormContainer" style={rightStyle}>
         <input onChange={this.handleUrlChange} type='text' placeholder='Google drive link' value={this.state.img} style={rightStyle}></input><br></br>
         <input onChange={this.handleTitleChange} type='text' placeholder='Title' value={this.state.title} style={rightStyle}></input><br></br>
+        <input onChange={this.handleTagsChange} type='text' placeholder='Tags, separated, by, commas' value={this.state.tags} style={rightStyle}></input><br></br>
         <button onClick={this.handleSubmit}>Submit</button>
         <button onClick={this.handleCancel}>Cancel</button>
       </div>

@@ -15,7 +15,8 @@ const Graphic = sequelize.define('graphics', {
   number_of_ratings: Sequelize.INTEGER,
   avg_rating: Sequelize.FLOAT,
   view_count: Sequelize.INTEGER,
-  created_at: Sequelize.DATE
+  created_at: Sequelize.DATE,
+  tags: Sequelize.ARRAY(Sequelize.STRING)
 }, {
   timestamps: false
 })

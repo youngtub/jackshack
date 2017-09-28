@@ -32,7 +32,7 @@ const Explore = (props) => {
     if (props.search === '') {
       return (item) => {return true}
     } else {
-      return (item) => {return item.title.includes(props.search)}
+      return (item) => {return item.title.includes(props.search) || item.tags.join().includes(props.search)}
     }
   }
 
@@ -65,7 +65,7 @@ const exploreContainer = {
   padding: "10px",
   display: "inline block",
   float: "left",
-  height: "500px",
+  height: "550px",
   overflow: "scroll"
 }
 

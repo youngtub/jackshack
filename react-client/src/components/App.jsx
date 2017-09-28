@@ -54,14 +54,15 @@ loginCallback(name, id) {
     isLoggedIn: true,
     showLogin: false,
     uid: id
-  }, () => console.log('APP state', this.state))
+  })
 }
 
-submitGraphicsCallback() {
+submitGraphicsCallback(url) {
   this.setState({
     showSubmitGraphics: false
   })
   this.child.refreshExplore();
+  this.child.previewCallback(url); //doesnt work yet
 }
 
   render() {
@@ -99,7 +100,7 @@ submitGraphicsCallback() {
 
 
         <div classID="home">
-          <Home onRef={ref => (this.child = ref)}/>
+          <Home onRef={ref => (this.child = ref)} auth={this.state.isLoggedIn}/>
         </div>
       </div>
     )
