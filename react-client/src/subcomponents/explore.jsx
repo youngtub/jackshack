@@ -40,9 +40,9 @@ const Explore = (props) => {
     <div>
       <div className="exploreContainer" style={exploreContainer}>
         <h3 style={align} className="exploreHeader"> Explore Designs</h3>
-        {props.items.filter(setSearchFilter(props)).sort(setSortFunction(props)).map((entry) => (
+        {props.items.length ? props.items.filter(setSearchFilter(props)).sort(setSortFunction(props)).map((entry) => (
           <img src={getIdfromUrl(entry.link)} onClick={setPreviewImage} height={140} width={140} style={exploreStyle} key={entry.link.slice(33)}/>
-        ))}
+        )) : ''}
       </div>
     </div>
   )

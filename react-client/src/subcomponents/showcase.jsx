@@ -19,9 +19,9 @@ const Showcase = (props) => {
     <div>
     <h2 style={header}>Showcase</h2>
       <div className="showcaseContainer" style={showcaseContainer}>
-        {props.items.map((entry) => (
+        {props.items.length ? props.items.map((entry) => (
           <img src={getIdfromUrl(entry.link)} onClick={setPreviewImage} height={150} width={150} style={showcaseStyle} key={entry.link.slice(33)}/>
-        ))}
+        )) : ''}
       </div>
     </div>
   )

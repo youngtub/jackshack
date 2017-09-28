@@ -32,7 +32,7 @@ const Preview = (props) => {
       <div style={divStyle}>
         <img src="https://teemill.com/uploaded/public/58344ea7d34955.11549832.png" height={500} width={400} />
         <img src={`https://drive.google.com/uc?id=${props.details[1].slice(33)}`} height={100} width={100} style={overlayStyle} />
-        <p style={alignDescription}> "{props.details[0]}"</p>
+        <p style={titleStyle}> "{props.details[0]}"</p>
         <p style={alignDescription}> By:</p>
         <p style={usernameDisplay} onClick={onClickUser}>{props.details[6]} </p>
 
@@ -86,6 +86,11 @@ const rightStyle = {
   float: "right"
 }
 
+const titleStyle = {
+  textAlign: "center",
+  fontSize: '20px',
+  fontStyle: "italic"
+}
 
 const alignDescription = {
   textAlign: "center"
