@@ -17,13 +17,15 @@ class Home extends React.Component {
       explore: [],
       preview: ['default', 'https://drive.google.com/open?id=0BxlVLOVlVGhdNE9rWllHNENBekk'],
       sort: 'Recent',
-      search: ''
+      search: '',
+      userid: 0
     }
     this.previewCallback = this.previewCallback.bind(this);
     this.searchCallback = this.searchCallback.bind(this);
     this.refreshExplore = this.refreshExplore.bind(this);
     this.sortCallback = this.sortCallback.bind(this);
     this.userSelectCallback = this.userSelectCallback.bind(this);
+    this.fromAllUsers = this.fromAllUsers.bind(this);
   };
 
   componentDidMount() {
@@ -70,9 +72,25 @@ class Home extends React.Component {
   };
 
   userSelectCallback(str) {
-    this.setState({
-      search: str  //have to modify to look for user
+    axios.post('/api/getuserid', {
+      name: str
     })
+    .then( (id) => {
+      this.setState({
+        userid: id.data
+      })
+    })
+    .then( () => {
+      var filteredByUser = this.state.explore.filter( (item) => item.artistId === this.state.userid);
+      this.setState({
+        explore: filteredByUser
+      })
+    })
+    .then( () => {
+      $(".exploreHeader").append(`<p id='byartist'> By ${str} </p>`);
+      $(".backbutton").toggle();
+    })
+
   }
 
   searchCallback(str) {
@@ -84,6 +102,14 @@ class Home extends React.Component {
   sortCallback(str) {
     this.setState({
       sort: str
+    })
+  }
+
+  fromAllUsers() {
+    $('#byartist').remove();
+    $(".backbutton").toggle();
+    this.setState({
+      explore: this.state.library
     })
   }
 
@@ -103,8 +129,8 @@ class Home extends React.Component {
         <div classID="search">
           <Search searchcb={this.searchCallback} sortcb={this.sortCallback}/><br></br>
         </div>
-
-      <Explore items={this.state.explore} preview={this.previewCallback} sort={this.state.sort} search={this.state.search} className="exploreBox"/>
+<button className="backbutton" onClick={this.fromAllUsers} style={backButton}> Back to all artists </button>
+      <Explore items={this.state.explore} preview={this.previewCallback} sort={this.state.sort} search={this.state.search} user={this.state.userid} className="exploreBox"/>
     </div>
 
     <div classID="preview">
@@ -116,5 +142,10 @@ class Home extends React.Component {
 )}
 
 };
+
+const backButton = {
+  display: 'none',
+  marginLeft: '16%'
+}
 
 export default Home;

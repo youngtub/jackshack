@@ -32,14 +32,14 @@ const Explore = (props) => {
     if (props.search === '') {
       return (item) => {return true}
     } else {
-      return (item) => {return item.title.includes(props.search)}
+      return (item) => {return item.title.includes(props.search) || item.artistId === props.user}
     }
   }
 
   return (
     <div>
       <div className="exploreContainer" style={exploreContainer}>
-        <h3 style={align}> Explore Designs</h3>
+        <h3 style={align} className="exploreHeader"> Explore Designs</h3>
         {props.items.filter(setSearchFilter(props)).sort(setSortFunction(props)).map((entry) => (
           <img src={getIdfromUrl(entry.link)} onClick={setPreviewImage} height={140} width={140} style={exploreStyle} key={entry.link.slice(33)}/>
         ))}

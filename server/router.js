@@ -19,4 +19,6 @@ router.post('/login', login.handleLogin);
 
 router.post('/submitgraphic', submit.handleSubmit);
 
+router.post('/getuserid', login.justGetUserId)
+
 module.exports = router;
