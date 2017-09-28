@@ -45,4 +45,4 @@ if (count === 0) {
   count = 1;
 }
 
-export default = Graphic;
+module.exports = Graphic;

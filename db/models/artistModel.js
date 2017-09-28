@@ -31,4 +31,4 @@ Artist.sync({ force: false })
     count = 1;
   }
 
-export default = Artist;
+module.exports = Artist;
