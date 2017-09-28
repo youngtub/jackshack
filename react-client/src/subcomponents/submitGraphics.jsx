@@ -12,6 +12,7 @@ class SubmitGraphics extends React.Component {
     this.handleUrlChange = this.handleUrlChange.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
   }
   //functions
   handleUrlChange(e) {
@@ -27,32 +28,43 @@ class SubmitGraphics extends React.Component {
   };
 
   handleSubmit() {
-    axios.post('/api/submitgraphic', {
-      url: this.state.img,
-      artist: this.props.artist,
-      title: this.state.title
-    })
-    .then( () => {
-      this.setState({
-        img: '',
-        title: ''
-      }, this.triggerCallback)
-    })
+    if (this.state.img !== '') {
+      axios.post('/api/submitgraphic', {
+        url: this.state.img,
+        artist: this.props.artist,
+        title: this.state.title
+      })
+      .then( () => {
+        this.setState({
+          img: '',
+          title: ''
+        }, this.triggerCallback)
+      })
+    }
   };
+
+  handleCancel() {
+    this.setState({
+      img: '',
+      title: ''
+    }, this.triggerCallback)
+  }
 
   triggerCallback() {
     this.props.cb(); //unbound
   }
 
+          // <p style={infoStyle}> `Submit a Google drive link (should look like this: https://drive.google.com/open?id=0BxlVLOVlVGhdMlY2YXloUC02d1k)`</p>
 
   render() {
     return (
 
       <div classID="submitGraphicsFormContainer" style={rightStyle}>
-        <p style={infoStyle}> `Submit a Google drive link (should look like this: https://drive.google.com/open?id=0BxlVLOVlVGhdMlY2YXloUC02d1k)`</p>
+        <br></br><br></br>
         <input onChange={this.handleUrlChange} type='text' placeholder='Google drive link' value={this.state.img} style={rightStyle}></input><br></br>
         <input onChange={this.handleTitleChange} type='text' placeholder='Title' value={this.state.title} style={rightStyle}></input><br></br>
         <button onClick={this.handleSubmit}>Submit</button>
+        <button onClick={this.handleCancel}>Cancel</button>
       </div>
 
     )

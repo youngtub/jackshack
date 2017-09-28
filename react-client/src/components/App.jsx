@@ -85,7 +85,7 @@ submitGraphicsCallback() {
         {this.state.username !== '' ?
           <div style={rightStyle}>
             <div classID='usernameDisplay' style={textAlign}> Hi, {this.state.username}!</div>
-            <button onClick={this.showSubmitGraphics} style={submitGraphicsButtonStyle}>Submit your graphics</button><br></br>
+            <button className="submitgraphicsbutton" onClick={this.showSubmitGraphics} style={submitGraphicsButtonStyle}>Submit your graphics</button><br></br>
           </div>
             : ''
         }
