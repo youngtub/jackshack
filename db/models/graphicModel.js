@@ -29,16 +29,20 @@ Graphic.sync({ force: false })
   })
   .catch( (err) => console.error('In graphics table', err));
 
-// for (var key in linksObj) {
-//   Graphic.create({
-//     title: key,
-//     link: linksObj[key],
-//     total_rating: 0,
-//     number_of_ratings: 0,
-//     avg_rating: 0,
-//     view_count: 0,
-//     created_at: new Date(),
-//   })
-// }
+var count = 0;
+if (count === 0) {
+  for (var key in linksObj) {
+    Graphic.create({
+      title: key,
+      link: linksObj[key],
+      total_rating: 0,
+      number_of_ratings: 0,
+      avg_rating: 0,
+      view_count: 0,
+      created_at: new Date(),
+    })
+  }
+  count = 1;
+}
 
 module.exports = Graphic;
