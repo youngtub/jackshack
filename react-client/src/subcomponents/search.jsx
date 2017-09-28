@@ -43,7 +43,7 @@ render() {
 
 const searchStyle = {
   marginLeft: "5%",
-  height: '1%',
+  height: '7px',
   width: '7%',
   padding: "10px",
   border: "solid 1px #fff",
@@ -52,7 +52,7 @@ const searchStyle = {
 }
 
 const sortBy = {
-  marginLeft: '5%'
+  marginLeft: '10%'
 }
 
 const sortStyle = {

@@ -49,9 +49,9 @@ class SubmitGraphics extends React.Component {
     return (
 
       <div classID="submitGraphicsFormContainer" style={rightStyle}>
-        <p> `Submit a Google drive link (should look like this: https://drive.google.com/open?id=0BxlVLOVlVGhdMlY2YXloUC02d1k)`</p>
-        <input onChange={this.handleUrlChange} type='text' placeholder='Google drive link' value={this.state.img}></input><br></br>
-        <input onChange={this.handleTitleChange} type='text' placeholder='Title' value={this.state.title}></input><br></br>
+        <p style={infoStyle}> `Submit a Google drive link (should look like this: https://drive.google.com/open?id=0BxlVLOVlVGhdMlY2YXloUC02d1k)`</p>
+        <input onChange={this.handleUrlChange} type='text' placeholder='Google drive link' value={this.state.img} style={rightStyle}></input><br></br>
+        <input onChange={this.handleTitleChange} type='text' placeholder='Title' value={this.state.title} style={rightStyle}></input><br></br>
         <button onClick={this.handleSubmit}>Submit</button>
       </div>
 
@@ -61,6 +61,11 @@ class SubmitGraphics extends React.Component {
 
 const rightStyle = {
   float: "right"
+}
+
+const infoStyle = {
+  fontSize: "9px",
+  float: "right",
 }
 
 export default SubmitGraphics;

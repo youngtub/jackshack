@@ -28,10 +28,19 @@ const Explore = (props) => {
     return output;
   }
 
+  const setSearchFilter = (props) => {
+    if (props.search === '') {
+      return (item) => {return true}
+    } else {
+      return (item) => {return item.title.includes(props.search)}
+    }
+  }
+
   return (
     <div>
       <div className="exploreContainer" style={exploreContainer}>
-        {props.items.sort(setSortFunction(props)).map((entry) => (
+        <h3 style={align}> Explore Designs</h3>
+        {props.items.filter(setSearchFilter(props)).sort(setSortFunction(props)).map((entry) => (
           <img src={getIdfromUrl(entry.link)} onClick={setPreviewImage} height={140} width={140} style={exploreStyle} key={entry.link.slice(33)}/>
         ))}
       </div>
@@ -43,13 +52,17 @@ const exploreStyle = {
   padding: "20px"
 }
 
+const align = {
+  textAlign: "center"
+}
+
 const exploreContainer = {
   border: "solid black 1px",
   borderRadius: "70px",
   margin: "auto",
   marginLeft: "30px",
   width: "34%",
-  padding: "20px",
+  padding: "10px",
   display: "inline block",
   float: "left",
   height: "500px",

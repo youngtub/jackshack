@@ -17,7 +17,7 @@ const Showcase = (props) => {
 
   return (
     <div>
-    <h3>Showcase</h3>
+    <h2 style={header}>Showcase</h2>
       <div className="showcaseContainer" style={showcaseContainer}>
         {props.items.map((entry) => (
           <img src={getIdfromUrl(entry.link)} onClick={setPreviewImage} height={150} width={150} style={showcaseStyle} key={entry.link.slice(33)}/>
@@ -28,15 +28,23 @@ const Showcase = (props) => {
 }
 
 const showcaseStyle = {
-  padding: "20px"
+  padding: "10px",
+  border: "solid white 2px",
+  display: 'inline block',
+}
+
+const header = {
+  textAlign: "center"
 }
 
 const showcaseContainer = {
   border: "solid black 1px",
   borderRadius: "70px",
   margin: "auto",
-  width: "56%",
-  padding: "10px"
+  width: "50%",
+  padding: "15px",
+  backgroundColor: "black",
+  textAlign: "center"
 }
 
 export default Showcase;

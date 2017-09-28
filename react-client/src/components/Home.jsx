@@ -16,12 +16,14 @@ class Home extends React.Component {
       library: [],
       explore: [],
       preview: ['default', 'https://drive.google.com/open?id=0BxlVLOVlVGhdNE9rWllHNENBekk'],
-      sort: ''
+      sort: '',
+      search: ''
     }
     this.previewCallback = this.previewCallback.bind(this);
     this.searchCallback = this.searchCallback.bind(this);
     this.refreshExplore = this.refreshExplore.bind(this);
     this.sortCallback = this.sortCallback.bind(this);
+    this.userSelectCallback = this.userSelectCallback.bind(this);
   };
 
   componentDidMount() {
@@ -49,7 +51,6 @@ class Home extends React.Component {
   };
 
   refreshExplore() {
-    console.log('I got called');
     axios.get('/api/explore')
     .then( (res) => {
       this.setState({
@@ -62,32 +63,28 @@ class Home extends React.Component {
   previewCallback(imgurl) {
     axios.post('/api/getdetails', {link: imgurl})
     .then( (res) => {
-      console.log('res for preview', res)
       this.setState({
         preview: res.data
       })
     })
   };
 
+  userSelectCallback(str) {
+    this.setState({
+      search: str  //have to modify to look for user
+    })
+  }
+
   searchCallback(str) {
-    if (str !== '') {
-      var searched = this.state.library.filter( (item) => {
-        return item.title.includes(str);
-      })
-      this.setState({
-        explore: searched
-      })
-    } else {
-      this.setState({
-        explore: this.state.library
-      })
-    }
+    this.setState({
+      search: str
+    })
   };
 
   sortCallback(str) {
     this.setState({
       sort: str
-    }, () => console.log('Sort', this.state.sort))
+    })
   }
 
   render() {
@@ -98,19 +95,20 @@ class Home extends React.Component {
     <h1>JackShack</h1>
     <div classID="showcase">
       <Showcase items={this.state.showcase} preview={this.previewCallback}/>
+      <br></br>
     </div>
 
     <div classID="explore">
-      <h3>Explore Designs</h3>
+
         <div classID="search">
           <Search searchcb={this.searchCallback} sortcb={this.sortCallback}/><br></br>
         </div>
 
-      <Explore items={this.state.explore} preview={this.previewCallback} sort={this.state.sort} className="exploreBox"/>
+      <Explore items={this.state.explore} preview={this.previewCallback} sort={this.state.sort} search={this.state.search} className="exploreBox"/>
     </div>
 
     <div classID="preview">
-      <Preview details={this.state.preview} />
+      <Preview details={this.state.preview} userselectcb={this.userSelectCallback}/>
     </div>
 
   </div>
@@ -118,6 +116,5 @@ class Home extends React.Component {
 )}
 
 };
-
 
 export default Home;
