@@ -32,7 +32,7 @@ const Explore = (props) => {
     if (props.search === '') {
       return (item) => {return true}
     } else {
-      return (item) => {return item.title.includes(props.search) || item.artistId === props.user}
+      return (item) => {return item.title.includes(props.search)}
     }
   }
 

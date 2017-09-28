@@ -5,7 +5,7 @@ import $ from 'jquery';
 const Preview = (props) => {
 
   const onClickUser = (e) => {
-    var desired = $(e.target).text().slice(5);
+    var desired = $(e.target).text();
     props.userselectcb(desired);
   }
 
@@ -16,7 +16,8 @@ const Preview = (props) => {
         <img src="https://teemill.com/uploaded/public/58344ea7d34955.11549832.png" height={500} width={400} />
         <img src={`https://drive.google.com/uc?id=${props.details[1].slice(33)}`} height={100} width={100} style={overlayStyle} />
         <p style={alignDescription}> "{props.details[0]}"</p>
-        <p style={alignDescription} onClick={onClickUser}> By: {props.details[3]} </p>
+        <p style={alignDescription}> By:</p>
+        <p style={usernameDisplay} onClick={onClickUser}>{props.details[3]} </p>
         <p style={alignDescription}> View Count: {props.details[2]} </p>
       </div>
 
@@ -28,6 +29,13 @@ const divStyle = {
   position: "relative",
   display: "inline block",
 };
+
+const usernameDisplay = {
+  textAlign: "center",
+  textDecoration: "underline",
+  color: "blue",
+  cursor: "pointer"
+}
 
 const overlayStyle = {
   position: "absolute",
