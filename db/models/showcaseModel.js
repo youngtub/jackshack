@@ -30,4 +30,4 @@ if (count === 0) {
   count = 1;
 }
 
-module.exports = Showcase;
+exports = Showcase;
