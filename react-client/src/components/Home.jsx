@@ -16,7 +16,7 @@ class Home extends React.Component {
       library: [],
       explore: [],
       preview: ['default', 'https://drive.google.com/open?id=0BxlVLOVlVGhdNE9rWllHNENBekk'],
-      sort: '',
+      sort: 'Recent',
       search: ''
     }
     this.previewCallback = this.previewCallback.bind(this);

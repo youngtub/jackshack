@@ -42,6 +42,7 @@ const showcaseContainer = {
   borderRadius: "70px",
   margin: "auto",
   width: "50%",
+  height: '25%',
   padding: "15px",
   backgroundColor: "black",
   textAlign: "center"
