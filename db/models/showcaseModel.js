@@ -1,4 +1,4 @@
-const Sequelize = require('Sequelize');
+const Sequelize = require('sequelize');
 const sequelize = require('../../db');
 const Graphic = require('./graphicModel');
 const dummyShowcase = require('../../lib/dummyDataImageLinks').dummyShowcase;

@@ -1,4 +1,4 @@
-const Sequelize = require('Sequelize');
+const Sequelize = require('sequelize');
 const sequelize = require('../../db')
 const Artist = require('./artistModel');
 const linksObj = require('../../lib/dummyDataImageLinks').dummyDataLinks;
