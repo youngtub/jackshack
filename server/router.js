@@ -19,6 +19,8 @@ router.post('/login', login.handleLogin);
 
 router.post('/submitgraphic', submit.handleSubmit);
 
-router.post('/getuserid', login.justGetUserId)
+router.post('/getuserid', login.justGetUserId);
+
+router.post('/updateRating', explore.updateRating);
 
 module.exports = router;

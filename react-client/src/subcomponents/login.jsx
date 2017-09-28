@@ -38,8 +38,8 @@ class Signup extends React.Component {
 
 render() {
   return (
-    <div classID='signupForm' style={rightStyle}>
-      <br></br><br></br>
+    <div classID='loginForm' style={rightStyle}>
+
       <input type="text" placeholder="username" value={this.state.username} onChange={this.handleUsernameChange} style={formStyle}></input><br></br>
       <input type="text" placeholder="password" value={this.state.password} onChange={this.handlePasswordChange} style={formStyle}></input><br></br>
       <button onClick={this.submit} style={buttonStyle}>Log in</button>

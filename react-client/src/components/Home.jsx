@@ -117,8 +117,6 @@ class Home extends React.Component {
     return (
 
   <div>
-
-    <h1>JackShack</h1>
     <div classID="showcase">
       <Showcase items={this.state.showcase} preview={this.previewCallback}/>
       <br></br>
@@ -134,7 +132,7 @@ class Home extends React.Component {
     </div>
 
     <div classID="preview">
-      <Preview details={this.state.preview} userselectcb={this.userSelectCallback}/>
+      <Preview details={this.state.preview} userselectcb={this.userSelectCallback} refresh={this.previewCallback}/>
     </div>
 
   </div>

@@ -60,7 +60,6 @@ class SubmitGraphics extends React.Component {
     return (
 
       <div classID="submitGraphicsFormContainer" style={rightStyle}>
-        <br></br><br></br>
         <input onChange={this.handleUrlChange} type='text' placeholder='Google drive link' value={this.state.img} style={rightStyle}></input><br></br>
         <input onChange={this.handleTitleChange} type='text' placeholder='Title' value={this.state.title} style={rightStyle}></input><br></br>
         <button onClick={this.handleSubmit}>Submit</button>
@@ -72,6 +71,8 @@ class SubmitGraphics extends React.Component {
 };
 
 const rightStyle = {
+  marginLeft: "auto",
+  marginRight: "5px",
   float: "right"
 }
 

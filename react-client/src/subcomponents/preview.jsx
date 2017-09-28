@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import $ from 'jquery';
+import Stars from 'react-stars'
 
 const Preview = (props) => {
 
@@ -8,6 +9,16 @@ const Preview = (props) => {
     var desired = $(e.target).text();
     props.userselectcb(desired);
   }
+
+  const handleStarChange = (newRating) => {
+    axios.post('/api/updateRating', {
+      title: props.details[0],
+      newRating: newRating
+    })
+    .then( () => {
+      props.refresh(props.details[1])
+    })
+  };
 
   return (
     <div style={rightStyle}>
@@ -17,8 +28,13 @@ const Preview = (props) => {
         <img src={`https://drive.google.com/uc?id=${props.details[1].slice(33)}`} height={100} width={100} style={overlayStyle} />
         <p style={alignDescription}> "{props.details[0]}"</p>
         <p style={alignDescription}> By:</p>
-        <p style={usernameDisplay} onClick={onClickUser}>{props.details[3]} </p>
+        <p style={usernameDisplay} onClick={onClickUser}>{props.details[5]} </p>
         <p style={alignDescription}> View Count: {props.details[2]} </p>
+        <br></br>
+        <div style={alignStars}>
+          <Stars value={props.details[4]} onChange={handleStarChange}/>
+        </div>
+        <p style={alignDescription}>Current Rating: {props.details[4]} ({props.details[3]} ratings) </p>
       </div>
 
     </div>
@@ -30,6 +46,12 @@ const divStyle = {
   display: "inline block",
 };
 
+const alignStars = {
+  position: "absolute",
+  left: "175px",
+  bottom: "25px"
+}
+
 const usernameDisplay = {
   textAlign: "center",
   textDecoration: "underline",
@@ -40,7 +62,7 @@ const usernameDisplay = {
 const overlayStyle = {
   position: "absolute",
   left: "150px",
-  bottom: "370px"
+  bottom: "470px"
 }
 
 const rightStyle = {

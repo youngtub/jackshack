@@ -67,13 +67,13 @@ submitGraphicsCallback() {
   render() {
     return (
       <div>
-
+        <h1 style={bannerStyle}>JackShack</h1>
         {this.state.isLoggedIn ? '' :
         <div className="signupForm" style={rightStyle}>
           <button onClick={this.showSignUp} style={buttonStyle}>Sign up</button>
           <button onClick={this.showLogin} style={buttonStyle}>Log in</button>
         </div> }
-
+        <br></br><br></br>
         {this.state.showSignup ?
           <Signup cb={this.signupCallback} style={rightStyle}/> : ''
         }
@@ -85,11 +85,11 @@ submitGraphicsCallback() {
         {this.state.username !== '' ?
           <div style={rightStyle}>
             <div classID='usernameDisplay' style={textAlign}> Hi, {this.state.username}!</div>
-            <button className="submitgraphicsbutton" onClick={this.showSubmitGraphics} style={submitGraphicsButtonStyle}>Submit your graphics</button><br></br>
+            <button className="submitgraphicsbutton" onClick={this.showSubmitGraphics} style={submitGraphicsButtonStyle}>Submit your graphics</button>
           </div>
             : ''
         }
-
+        <br></br><br></br>
         {this.state.showSubmitGraphics ?
           <div>
             <br></br>
@@ -134,6 +134,11 @@ const submitGraphicsButtonStyle = {
   fontFamily: 'verdana',
   fontSize: '14px',
   borderRadius: "75px"
+}
+
+const bannerStyle = {
+  width: "30%",
+  margin: '0%'
 }
 
 export default App;
