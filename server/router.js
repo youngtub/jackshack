@@ -6,6 +6,7 @@ const explore = require('./controllers/explore');
 const signup = require('./controllers/signup');
 const submit = require('./controllers/submit');
 const login = require('./controllers/login');
+const order = require('./controllers/order');
 
 router.get('/showcase', showcase.getAll);
 
@@ -22,5 +23,13 @@ router.post('/submitgraphic', submit.handleSubmit);
 router.post('/getuserid', login.justGetUserId);
 
 router.post('/updateRating', explore.updateRating);
+
+router.post('/addToBag', order.addToBag);
+
+router.post('/getBagDetails', order.getBagDetails);
+
+router.post('/getArtistNameForBag', order.decorateShirtObjWithArtistName);
+
+router.post('/getGraphicTitleForBag', order.decorateShirtObjWithGraphicTitle);
 
 module.exports = router;

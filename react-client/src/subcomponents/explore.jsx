@@ -62,7 +62,7 @@ const exploreContainer = {
   border: "solid black 1px",
   borderRadius: "70px",
   margin: "auto",
-  marginLeft: "30px",
+  marginLeft: "2%",
   width: "36%",
   padding: "10px",
   display: "inline block",

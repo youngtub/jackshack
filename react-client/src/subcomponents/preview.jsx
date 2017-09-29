@@ -9,6 +9,7 @@ class Preview extends React.Component {
     super(props);
     this.state = {
       color: 'White',
+      size: 'XS',
       showDetails: true,
       showOrderForm: false
     }
@@ -18,6 +19,8 @@ class Preview extends React.Component {
     this.handleShirtColorChange = this.handleShirtColorChange.bind(this);
     this.openOrderForm = this.openOrderForm.bind(this);
     this.cancelOrderCallback = this.cancelOrderCallback.bind(this);
+    this.orderSelectSizeCb = this.orderSelectSizeCb.bind(this);
+    this.completeAddToBagCallback = this.completeAddToBagCallback.bind(this);
   }
 
     onClickUser(e) {
@@ -72,12 +75,29 @@ class Preview extends React.Component {
     }
   }
 
+  orderSelectSizeCb(size) {
+    this.setState({
+      size: size
+    })
+  }
+
   cancelOrderCallback() {
     $('.orderButton').toggle();
     this.setState({
       showDetails: true,
       showOrderForm: false
     })
+  }
+
+  completeAddToBagCallback() {
+    $('.orderButton').toggle();
+    this.setState({
+      showDetails: true,
+      showOrderForm: false
+    })
+    var alertMessage = `<p id='orderedAlert' style="text-align: center; color: blue; font-weight: bold"> Added to Bag! [Click to hide]</p> `
+    $('.previewContainer').append(alertMessage)
+    $('#orderedAlert').click( () => $('#orderedAlert').remove())
   }
 
   render() {
@@ -106,7 +126,7 @@ class Preview extends React.Component {
 
           <div className="usernameDisplay" style={alignDescription}>
             <a> By: </a>
-            <a style={usernameDisplay} onClick={this.onClickUser}>{this.props.details[6]} </a>
+            <a style={usernameDisplay} onClick={this.onClickUser}>{this.props.details[7]} </a>
           </div>
               { this.state.showDetails ?
               <div className="productDetails">
@@ -130,7 +150,7 @@ class Preview extends React.Component {
 
             <div className="orderForm">
             {this.state.showOrderForm ?
-              <Order color={this.state.color} cancelCb={this.cancelOrderCallback}/> : ''}
+              <Order color={this.state.color} cancelCb={this.cancelOrderCallback} size={this.state.size} sizecb={this.orderSelectSizeCb} uid={this.props.uid} graphicId={this.props.details[6]} addToBagCallback={this.props.addToBagCallback} artistId={this.props.details[8]} ordered={this.completeAddToBagCallback}/> : ''}
             </div>
 
           </div>
@@ -147,6 +167,7 @@ const boxStyle = {
   border: "solid black 1px",
   borderRadius: "70px",
   margin: "auto",
+  marginRight: "2%",
   width: "26%",
   padding: "5px",
 }

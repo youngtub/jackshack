@@ -15,7 +15,7 @@ class Home extends React.Component {
       showcase: [],
       library: [],
       explore: [],
-      preview: ['default', 'https://drive.google.com/open?id=0BxlVLOVlVGhdNE9rWllHNENBekk', 0, 0, 0, 'demo, mock', 'JS'],
+      preview: ['default', 'https://drive.google.com/open?id=0BxlVLOVlVGhdNE9rWllHNENBekk', 0, 0, 0, 'demo, mock', 0, 'JS', 0],
       sort: 'Recent',
       search: '',
       userid: 0
@@ -136,7 +136,7 @@ class Home extends React.Component {
     </div>
 
     <div classID="preview">
-      <Preview details={this.state.preview} userselectcb={this.userSelectCallback} refresh={this.previewCallback} auth={this.props.auth}/>
+      <Preview details={this.state.preview} userselectcb={this.userSelectCallback} refresh={this.previewCallback} auth={this.props.auth} uid={this.props.uid} addToBagCallback={this.props.addToBagCallback}/>
     </div>
 
   </div>

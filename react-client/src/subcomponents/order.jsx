@@ -1,9 +1,28 @@
 import React from 'react';
+import axios from 'axios'
 
 const Order = (props) => {
 
   const onCancel = () => {
     props.cancelCb();
+  };
+
+  const sizeChange = (e) => {
+    props.sizecb(e.target.value)
+  };
+
+  const addToBag = () => {
+    props.ordered();
+    axios.post('/api/addToBag', {
+      color: props.color,
+      size: props.size,
+      customerId: props.uid,
+      graphicId: props.graphicId,
+      artistId: props.artistId
+    })
+    .then( () => {
+      props.addToBagCallback()
+    })
   }
 
   return (
@@ -11,7 +30,7 @@ const Order = (props) => {
       <h3 style={align}> Order </h3>
       <div className="sizeSelect" style={align}>
         <a>Size: </a>
-        <select>
+        <select onChange={sizeChange}>
           <option>XS</option>
           <option>S</option>
           <option>M</option>
@@ -25,7 +44,7 @@ const Order = (props) => {
       </div><br></br>
 
       <div className="proceed" style={align}>
-        <button> Add to Bag </button>
+        <button onClick={addToBag}> Add to Bag </button>
         <button> Checkout </button>
         <button onClick={onCancel}> Cancel </button>
         <br></br>

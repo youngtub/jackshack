@@ -29,7 +29,7 @@ exports.getDetails = (req, res) => {
     })
     .then( (graphicObject) => {
       var artist_id = graphicObject[0].dataValues.artistId;
-      responseArray.push(graphicObject[0].dataValues.title, graphicObject[0].dataValues.link, graphicObject[0].dataValues.view_count, graphicObject[0].dataValues.number_of_ratings, graphicObject[0].dataValues.avg_rating, graphicObject[0].dataValues.tags.join(', '))
+      responseArray.push(graphicObject[0].dataValues.title, graphicObject[0].dataValues.link, graphicObject[0].dataValues.view_count, graphicObject[0].dataValues.number_of_ratings, graphicObject[0].dataValues.avg_rating, graphicObject[0].dataValues.tags.join(', '), graphicObject[0].dataValues.id)
       Artist.findAll({
         where: {
           id: artist_id
@@ -37,10 +37,11 @@ exports.getDetails = (req, res) => {
       })
       .then( (artistObject) => {
         var artistName = artistObject[0].dataValues.name;
-        responseArray.push(artistName);
+        var artistId = artistObject[0].dataValues.id
+        responseArray.push(artistName, artistId);
       })
       .then( () => {
-        //response array: [title, link, view_count, number_of_ratings, avg_rating, tags, artistName]
+        //response array: [title, link, view_count, number_of_ratings, avg_rating, tags,  graphicId, artistName, artistId]
         res.send(responseArray)
       })
     })
