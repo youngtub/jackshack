@@ -26,11 +26,46 @@ const Preview = (props) => {
     }
   };
 
+  const handleShirtColorChange = (e) => {
+    var newColor = e.target.value;
+    if (newColor === 'Black') {
+      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/583c37d32fe816.11282353.png')
+    } else if (newColor === 'Bright Blue') {
+      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/595e0d5feeae61.28611647.png')
+    } else if (newColor === 'Navy Blue') {
+      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/595e17c7bfac27.43854672.png')
+    } else if (newColor === 'Dark Grey') {
+      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/595e0dde4fb493.81681537.png')
+    } else if (newColor === 'Light Grey') {
+      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/598dcff322e268.72994500.png')
+    } else if (newColor === 'Red') {
+      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/595e154ab48682.49788334.png')
+    } else if (newColor === 'Green') {
+      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/595e15cedcbd52.43268842.png')
+    } else if (newColor === 'White') {
+      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/58344ea7d34955.11549832.png')
+    }
+  }
+
   return (
     <div style={rightStyle} className="previewContainer">
       <h3 style={alignDescription}> Preview shirt </h3>
+
+      <div style={alignDescription}>
+        <select onChange={handleShirtColorChange} style={alignColorSelect}>
+          <option>White</option>
+          <option>Black</option>
+          <option>Bright Blue</option>
+          <option>Navy Blue</option>
+          <option>Dark Grey</option>
+          <option>Light Grey</option>
+          <option>Red</option>
+          <option>Green</option>
+        </select>
+      </div>
+
       <div style={divStyle}>
-        <img src="https://teemill.com/uploaded/public/58344ea7d34955.11549832.png" height={500} width={400} />
+        <img src="https://teemill.com/uploaded/public/58344ea7d34955.11549832.png" height={500} width={400} className="shirtColor"/>
         <img src={`https://drive.google.com/uc?id=${props.details[1].slice(33)}`} height={100} width={100} style={overlayStyle} />
         <p style={titleStyle}> "{props.details[0]}"</p>
         <p style={alignDescription}> By:</p>
@@ -57,6 +92,10 @@ const divStyle = {
   position: "relative",
   display: "inline block",
 };
+
+const alignColorSelect = {
+  margin: "auto"
+}
 
 const alignStars = {
   position: "absolute",

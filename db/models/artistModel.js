@@ -19,16 +19,16 @@ Artist.sync({ force: false })
   })
   .catch( (err) => console.error('In Artist table', err))
 
-  var count = 0;
-  if (count === 0) {
-      artist.create({
-        name: 'JackShack0',
-        email: 'j@j.com',
-        password: 'test',
-        score: 0
-      })
-    }
-    count = 1;
-  }
+  // var count = 0;
+  // if (count === 0) {
+  //     artist.create({
+  //       name: 'JackShack0',
+  //       email: 'j@j.com',
+  //       password: 'test',
+  //       score: 0
+  //     })
+  //   }
+  //   count = 1;
+  // }
 
 module.exports = Artist;

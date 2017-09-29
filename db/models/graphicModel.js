@@ -16,7 +16,8 @@ const Graphic = sequelize.define('graphics', {
   avg_rating: Sequelize.FLOAT,
   view_count: Sequelize.INTEGER,
   created_at: Sequelize.DATE,
-  tags: Sequelize.ARRAY(Sequelize.STRING)
+  tags: Sequelize.ARRAY(Sequelize.STRING),
+  gvisiontags: Sequelize.ARRAY(Sequelize.STRING)
 }, {
   timestamps: false
 })
@@ -29,20 +30,20 @@ Graphic.sync({ force: false })
   })
   .catch( (err) => console.error('In graphics table', err));
 
-var count = 0;
-if (count === 0) {
-  for (var key in linksObj) {
-    Graphic.create({
-      title: key,
-      link: linksObj[key],
-      total_rating: 0,
-      number_of_ratings: 0,
-      avg_rating: 0,
-      view_count: 0,
-      created_at: new Date(),
-    })
-  }
-  count = 1;
-}
+// var count = 0;
+// if (count === 0) {
+//   for (var key in linksObj) {
+//     Graphic.create({
+//       title: key,
+//       link: linksObj[key],
+//       total_rating: 0,
+//       number_of_ratings: 0,
+//       avg_rating: 0,
+//       view_count: 0,
+//       created_at: new Date(),
+//     })
+//   }
+//   count = 1;
+// }
 
 module.exports = Graphic;

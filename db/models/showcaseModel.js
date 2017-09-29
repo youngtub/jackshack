@@ -20,14 +20,14 @@ Showcase.sync({ force: false })
   })
   .catch( (err) => console.error('In graphics table', err));
 
-var count = 0;
-if (count === 0) {
-  for (var key in dummyShowcase) {
-    Showcase.create({
-      link: dummyShowcase[key]
-    })
-  }
-  count = 1;
-}
+// var count = 0;
+// if (count === 0) {
+//   for (var key in dummyShowcase) {
+//     Showcase.create({
+//       link: dummyShowcase[key]
+//     })
+//   }
+//   count = 1;
+// }
 
 module.exports = Showcase;
