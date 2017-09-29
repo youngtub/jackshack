@@ -5,6 +5,10 @@ body {
   background-color: #eaecef;
 }
 
+button {
+  font-family:'Montserrat',sans-serif;
+}
+
 h1 {
   color: #00a07b;
 }

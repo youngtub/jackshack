@@ -24,6 +24,8 @@ const Explore = (props) => {
       output = (a,b) => (b.view_count) - (a.view_count);
     } else if (props.sort === 'Underground') {
       output = (a,b) => (a.view_count) - (b.view_count);
+    } else if (props.sort === 'Top Rated') {
+      output = (a,b) => (b.avg_rating) - (a.avg_rating);
     }
     return output;
   }
@@ -61,7 +63,7 @@ const exploreContainer = {
   borderRadius: "70px",
   margin: "auto",
   marginLeft: "30px",
-  width: "34%",
+  width: "36%",
   padding: "10px",
   display: "inline block",
   float: "left",

@@ -176,7 +176,7 @@ const usernameDisplay = {
 const overlayStyle = {
   position: "absolute",
   left: "150px",
-  top: "135px"
+  top: "140px"
 }
 
 const titleStyle = {

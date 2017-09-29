@@ -34,6 +34,7 @@ render() {
             <option> Classics </option>
             <option> Popular </option>
             <option> Underground </option>
+            <option> Top Rated </option>
           </select>
       </div>
     )

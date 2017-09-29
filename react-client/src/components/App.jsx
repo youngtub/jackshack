@@ -123,7 +123,6 @@ const buttonStyle = {
   color: 'black',
   width: '90px',
   padding: '5px',
-  fontFamily: 'verdana',
   fontSize: '16px'
 }
 

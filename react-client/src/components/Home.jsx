@@ -125,11 +125,14 @@ class Home extends React.Component {
 
     <div classID="explore">
 
-        <div classID="search">
-          <Search searchcb={this.searchCallback} sortcb={this.sortCallback}/><br></br>
-        </div>
-<button className="backbutton" onClick={this.fromAllUsers} style={backButton}> Back to all artists </button>
+      <div classID="search">
+        <Search searchcb={this.searchCallback} sortcb={this.sortCallback}/><br></br>
+      </div>
+
+      <button className="backbutton"onClick={this.fromAllUsers} style={backButton}> Back to all artists </button>
+
       <Explore items={this.state.explore} preview={this.previewCallback} sort={this.state.sort} search={this.state.search} user={this.state.userid} className="exploreBox"/>
+
     </div>
 
     <div classID="preview">
@@ -144,7 +147,13 @@ class Home extends React.Component {
 
 const backButton = {
   display: 'none',
-  marginLeft: '16%'
+  marginLeft: '13%',
+  backgroundColor: '#e7e7e7',
+  color: 'black',
+  width: '200px',
+  padding: '5px',
+  fontSize: '16px'
 }
+
 
 export default Home;
