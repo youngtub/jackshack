@@ -175,6 +175,7 @@ const boxStyle = {
 const divStyle = {
   position: "relative",
   display: "inline block",
+  marginLeft: "3%"
 };
 
 const alignColorSelect = {

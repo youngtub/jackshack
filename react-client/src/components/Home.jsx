@@ -15,7 +15,7 @@ class Home extends React.Component {
       showcase: [],
       library: [],
       explore: [],
-      preview: ['default', 'https://drive.google.com/open?id=0BxlVLOVlVGhdNE9rWllHNENBekk', 0, 0, 0, 'demo, mock', 0, 'JS', 0],
+      preview: ['JackShack', 'https://drive.google.com/open?id=0BxlVLOVlVGhdQmtXTFVTTEVrN00', 0, 0, 0, 'default', 0, 'JackShack', 0],
       sort: 'Recent',
       search: '',
       userid: 0

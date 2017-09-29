@@ -161,7 +161,7 @@ addToBagCallback() {
           <Home onRef={ref => (this.child = ref)} auth={this.state.isLoggedIn} uid={this.state.uid} addToBagCallback={this.addToBagCallback}/>
         </div>
 
-          <img src='https://drive.google.com/uc?id=0BxlVLOVlVGhdVzJUY2xFUkZJRE0' className='logo' style={logoStyle}></img>
+          <img src='https://drive.google.com/uc?id=0BxlVLOVlVGhdQmtXTFVTTEVrN00' className='logo' style={logoStyle}></img>
 
       </div>
 
