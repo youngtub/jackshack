@@ -1,23 +1,38 @@
 import React from 'react';
 import axios from 'axios';
 import $ from 'jquery';
-import Stars from 'react-stars'
+import Stars from 'react-stars';
+import Order from './order.jsx';
 
-const Preview = (props) => {
-
-  const onClickUser = (e) => {
-    var desired = $(e.target).text();
-    props.userselectcb(desired);
+class Preview extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      color: 'White',
+      showDetails: true,
+      showOrderForm: false
+    }
+    //bindings
+    this.onClickUser = this.onClickUser.bind(this);
+    this.handleStarChange = this.handleStarChange.bind(this);
+    this.handleShirtColorChange = this.handleShirtColorChange.bind(this);
+    this.openOrderForm = this.openOrderForm.bind(this);
+    this.cancelOrderCallback = this.cancelOrderCallback.bind(this);
   }
 
-  const handleStarChange = (newRating) => {
-    if (props.auth) {
+    onClickUser(e) {
+    var desired = $(e.target).text();
+    this.props.userselectcb(desired);
+  }
+
+    handleStarChange(newRating) {
+    if (this.props.auth) {
       axios.post('/api/updateRating', {
-        title: props.details[0],
+        title: this.props.details[0],
         newRating: newRating
       })
       .then( () => {
-        props.refresh(props.details[1])
+        this.props.refresh(this.props.details[1])
       })
     } else {
       var alertMessage = `<p id='loginAlert' style="text-align: center; color: red; font-weight: bold"> Please Log in/Sign up to rate! [Click to hide]</p> `
@@ -26,8 +41,11 @@ const Preview = (props) => {
     }
   };
 
-  const handleShirtColorChange = (e) => {
+    handleShirtColorChange(e){
     var newColor = e.target.value;
+    this.setState({
+      color: e.target.value
+    })
     if (newColor === 'Black') {
       $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/583c37d32fe816.11282353.png')
     } else if (newColor === 'Bright Blue') {
@@ -47,46 +65,85 @@ const Preview = (props) => {
     }
   }
 
-  return (
-    <div style={rightStyle} className="previewContainer">
-      <h3 style={alignDescription}> Preview shirt </h3>
+  openOrderForm() {
+    $('.orderButton').toggle();
+    this.setState({
+      showOrderForm: true,
+      showDetails: false
+    })
+  }
 
-      <div style={alignDescription}>
-        <select onChange={handleShirtColorChange} style={alignColorSelect}>
-          <option>White</option>
-          <option>Black</option>
-          <option>Bright Blue</option>
-          <option>Navy Blue</option>
-          <option>Dark Grey</option>
-          <option>Light Grey</option>
-          <option>Red</option>
-          <option>Green</option>
-        </select>
-      </div>
+  cancelOrderCallback() {
+    $('.orderButton').toggle();
+    this.setState({
+      showDetails: true,
+      showOrderForm: false
+    })
+  }
 
-      <div style={divStyle}>
-        <img src="https://teemill.com/uploaded/public/58344ea7d34955.11549832.png" height={500} width={400} className="shirtColor"/>
-        <img src={`https://drive.google.com/uc?id=${props.details[1].slice(33)}`} height={100} width={100} style={overlayStyle} />
-        <p style={titleStyle}> "{props.details[0]}"</p>
-        <p style={alignDescription}> By:</p>
-        <p style={usernameDisplay} onClick={onClickUser}>{props.details[6]} </p>
+  render() {
+    return (
+      <div style={rightStyle} className="previewContainer">
+        <h3 style={alignDescription}> Preview shirt </h3>
 
-        <p style={alignDescription}> Tags: {
-            props.details[5].length ? props.details[5] : ''
-          }</p>
-
-        <p style={alignDescription}> View Count: {props.details[2]} </p>
-        <br></br>
-
-        <div style={alignStars}>
-          <Stars value={props.details[4]} onChange={handleStarChange}/>
+        <div style={alignDescription}>
+          <select onChange={this.handleShirtColorChange} style={alignColorSelect}>
+            <option>White</option>
+            <option>Black</option>
+            <option>Bright Blue</option>
+            <option>Navy Blue</option>
+            <option>Dark Grey</option>
+            <option>Light Grey</option>
+            <option>Red</option>
+            <option>Green</option>
+          </select>
         </div>
-        <p style={alignDescription}>Current Rating: {Math.round(props.details[4]*100)/100} ({props.details[3]} ratings) </p>
-      </div>
 
-    </div>
-  )
+        <div style={divStyle}>
+          <img src="https://teemill.com/uploaded/public/58344ea7d34955.11549832.png" height={500} width={400} className="shirtColor"/>
+          <img src={`https://drive.google.com/uc?id=${this.props.details[1].slice(33)}`} height={100} width={100} style={overlayStyle} />
+
+
+
+            <p style={titleStyle}> "{this.props.details[0]}"</p>
+
+          <div className="usernameDisplay" style={alignDescription}>
+            <a> By: </a>
+            <a style={usernameDisplay} onClick={this.onClickUser}>{this.props.details[6]} </a>
+          </div>
+              { this.state.showDetails ?
+              <div className="productDetails">
+                <p style={alignDescription}> Tags: {
+                    this.props.details[5].length ? this.props.details[5] : ''
+                  }</p>
+
+                <p style={alignDescription}> View Count: {this.props.details[2]} </p>
+                  <br></br>
+
+                  <div style={alignStars}>
+                    <Stars value={this.props.details[4]} onChange={this.handleStarChange}/>
+                  </div>
+                  <p style={alignDescription}>Current Rating: {Math.round(this.props.details[4]*100)/100} ({this.props.details[3]} ratings) </p>
+              </div>
+              : ''}
+
+            <div className="orderButton" style={alignDescription}>
+              <button onClick={this.openOrderForm}> Order </button>
+            </div>
+
+            <div className="orderForm">
+            {this.state.showOrderForm ?
+              <Order color={this.state.color} cancelCb={this.cancelOrderCallback}/> : ''}
+            </div>
+
+          </div>
+
+        </div>
+      )
+  }
+
 };
+
 
 const divStyle = {
   position: "relative",
@@ -100,7 +157,7 @@ const alignColorSelect = {
 const alignStars = {
   position: "absolute",
   left: "175px",
-  bottom: "25px"
+  bottom: "70px"
 }
 
 const usernameDisplay = {
@@ -113,7 +170,7 @@ const usernameDisplay = {
 const overlayStyle = {
   position: "absolute",
   left: "150px",
-  bottom: "505px"
+  bottom: "550px"
 }
 
 const rightStyle = {
