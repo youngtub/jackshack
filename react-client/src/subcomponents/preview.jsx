@@ -46,31 +46,30 @@ class Preview extends React.Component {
     this.setState({
       color: e.target.value
     })
-    if (newColor === 'Black') {
-      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/583c37d32fe816.11282353.png')
-    } else if (newColor === 'Bright Blue') {
-      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/595e0d5feeae61.28611647.png')
-    } else if (newColor === 'Navy Blue') {
-      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/595e17c7bfac27.43854672.png')
-    } else if (newColor === 'Dark Grey') {
-      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/595e0dde4fb493.81681537.png')
-    } else if (newColor === 'Light Grey') {
-      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/598dcff322e268.72994500.png')
-    } else if (newColor === 'Red') {
-      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/595e154ab48682.49788334.png')
-    } else if (newColor === 'Green') {
-      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/595e15cedcbd52.43268842.png')
-    } else if (newColor === 'White') {
-      $('.shirtColor').attr('src', 'https://teemill.com/uploaded/public/58344ea7d34955.11549832.png')
-    }
-  }
+    const colorPicker = {
+      'Black' : 'https://teemill.com/uploaded/public/583c37d32fe816.11282353.png',
+      'Bright Blue' : 'https://teemill.com/uploaded/public/595e0d5feeae61.28611647.png',
+      'Navy Blue' : 'https://teemill.com/uploaded/public/595e17c7bfac27.43854672.png',
+      'Dark Grey' : 'https://teemill.com/uploaded/public/595e0dde4fb493.81681537.png',
+      'Light Grey' : 'https://teemill.com/uploaded/public/598dcff322e268.72994500.png',
+      'Red' : 'https://teemill.com/uploaded/public/595e154ab48682.49788334.png',
+      'White' : 'https://teemill.com/uploaded/public/58344ea7d34955.11549832.png'
+    };
+    $('.shirtColor').attr('src', colorPicker[newColor])
+  };
 
   openOrderForm() {
-    $('.orderButton').toggle();
-    this.setState({
-      showOrderForm: true,
-      showDetails: false
-    })
+    if (this.props.auth) {
+      $('.orderButton').toggle();
+      this.setState({
+        showOrderForm: true,
+        showDetails: false
+      })
+    } else {
+      var alertMessage = `<p id='loginAlert' style="text-align: center; color: red; font-weight: bold"> Please Log in/Sign up to Order! [Click to hide]</p> `
+      $('.previewContainer').append(alertMessage)
+      $('#loginAlert').click( () => $('#loginAlert').remove())
+    }
   }
 
   cancelOrderCallback() {
@@ -83,7 +82,7 @@ class Preview extends React.Component {
 
   render() {
     return (
-      <div style={rightStyle} className="previewContainer">
+      <div style={boxStyle} className="previewContainer">
         <h3 style={alignDescription}> Preview shirt </h3>
 
         <div style={alignDescription}>
@@ -102,8 +101,6 @@ class Preview extends React.Component {
         <div style={divStyle}>
           <img src="https://teemill.com/uploaded/public/58344ea7d34955.11549832.png" height={500} width={400} className="shirtColor"/>
           <img src={`https://drive.google.com/uc?id=${this.props.details[1].slice(33)}`} height={100} width={100} style={overlayStyle} />
-
-
 
             <p style={titleStyle}> "{this.props.details[0]}"</p>
 
@@ -144,6 +141,15 @@ class Preview extends React.Component {
 
 };
 
+const boxStyle = {
+  float: "right",
+  height: "44%",
+  border: "solid black 1px",
+  borderRadius: "70px",
+  margin: "auto",
+  width: "26%",
+  padding: "5px",
+}
 
 const divStyle = {
   position: "relative",
@@ -170,16 +176,7 @@ const usernameDisplay = {
 const overlayStyle = {
   position: "absolute",
   left: "150px",
-  bottom: "550px"
-}
-
-const rightStyle = {
-  border: "solid black 1px",
-  borderRadius: "70px",
-  margin: "auto",
-  width: "26%",
-  padding: "5px",
-  float: "right"
+  top: "135px"
 }
 
 const titleStyle = {
