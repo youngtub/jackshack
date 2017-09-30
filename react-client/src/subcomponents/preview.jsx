@@ -56,6 +56,7 @@ class Preview extends React.Component {
       'Dark Grey' : 'https://teemill.com/uploaded/public/595e0dde4fb493.81681537.png',
       'Light Grey' : 'https://teemill.com/uploaded/public/598dcff322e268.72994500.png',
       'Red' : 'https://teemill.com/uploaded/public/595e154ab48682.49788334.png',
+      'Green' : 'https://teemill.com/uploaded/public/595e15cedcbd52.43268842.png',
       'White' : 'https://teemill.com/uploaded/public/58344ea7d34955.11549832.png'
     };
     $('.shirtColor').attr('src', colorPicker[newColor])

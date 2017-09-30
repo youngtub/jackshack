@@ -4,7 +4,8 @@ import axios from 'axios';
 import Signup from '../subcomponents/signup.jsx'
 import Login from '../subcomponents/login.jsx'
 import SubmitGraphics from '../subcomponents/submitGraphics.jsx';
-import Bag from '../subcomponents/bag.jsx'
+import Bag from '../subcomponents/bag.jsx';
+import $ from 'jquery';
 
 class App extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ this.signupCallback = this.signupCallback.bind(this);
 this.loginCallback = this.loginCallback.bind(this);
 this.submitGraphicsCallback = this.submitGraphicsCallback.bind(this);
 this.addToBagCallback = this.addToBagCallback.bind(this);
+// this.toggleChimney = this.toggleChimney.bind(this);
   }
 
 //functions
@@ -50,6 +52,7 @@ showBagContents() {
 }
 
 signupCallback(name, id) {
+  this.toggleChimney();
   this.setState({
     username: name,
     isLoggedIn: true,
@@ -64,7 +67,7 @@ loginCallback(name, id) {
     isLoggedIn: true,
     showLogin: false,
     uid: id
-  }, this.addToBagCallback)
+  }, this.addToBagCallback);
 }
 
 logoutUser() {
@@ -75,12 +78,22 @@ logoutUser() {
   })
 }
 
+toggleChimney() {
+  $('.smoke').fadeToggle();
+  setTimeout( () => $('.smoke').fadeToggle(2000), 5000)
+}
+
+componentDidMount() {
+  $('.smoke').toggle();
+}
+
 submitGraphicsCallback(url) {
   this.setState({
     showSubmitGraphics: false
   })
   this.child.refreshExplore();
   this.child.previewCallback(url);
+  this.toggleChimney();
 }
 
 addToBagCallback() {
@@ -106,6 +119,7 @@ addToBagCallback() {
       });
     })
   })
+  this.toggleChimney();
   // .then( () => {
   //   this.setState({
   //     bag: newBag
@@ -161,7 +175,10 @@ addToBagCallback() {
           <Home onRef={ref => (this.child = ref)} auth={this.state.isLoggedIn} uid={this.state.uid} addToBagCallback={this.addToBagCallback}/>
         </div>
 
+          <img src='https://drive.google.com/uc?id=0BxlVLOVlVGhdcXZ3aENlckphT1U' className='smoke' style={chimneyStyle}></img>
           <img src='https://drive.google.com/uc?id=0BxlVLOVlVGhdQmtXTFVTTEVrN00' className='logo' style={logoStyle}></img>
+
+
 
       </div>
 
@@ -169,6 +186,19 @@ addToBagCallback() {
   }
 
 };
+
+const chimneyStyle = {
+  position: "absolute",
+  left: "50%",
+  top: "38%",
+  opacity: '0.5',
+}
+
+const logoStyle = {
+  opacity: "0.25",
+  marginLeft: "4%",
+  marginTop: "1%"
+}
 
 const rightStyle = {
   float: "right"
@@ -201,12 +231,6 @@ const submitGraphicsButtonStyle = {
 const bannerStyle = {
   width: "30%",
   margin: '0%'
-}
-
-const logoStyle = {
-  opacity: "0.25",
-  marginLeft: "4%",
-  marginTop: "1%"
 }
 
 export default App;

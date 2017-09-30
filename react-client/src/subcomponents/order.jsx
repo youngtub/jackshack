@@ -45,7 +45,6 @@ const Order = (props) => {
 
       <div className="proceed" style={align}>
         <button onClick={addToBag}> Add to Bag </button>
-        <button> Checkout </button>
         <button onClick={onCancel}> Cancel </button>
         <br></br>
       </div>

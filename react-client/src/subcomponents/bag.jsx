@@ -13,7 +13,9 @@ const Bag = (props) => {
           <img src={`https://drive.google.com/uc?id=${item.imgurl.slice(-28)}`} height={50} width={50}></img>
         </div>
       )) : ''}
-
+      <div style={checkoutButton}>
+        <button style={checkoutButtonStyle}> Checkout </button>
+      </div>
     </div>
   )
 };
@@ -29,6 +31,15 @@ const bagItem = {
   borderRadius: "10px",
   display: "inline block",
   padding: "5px"
+}
+
+const checkoutButton = {
+  textAlign: "center",
+  backgroundColor: "#eaecef"
+}
+
+const checkoutButtonStyle = {
+  height: "40px"
 }
 
 export default Bag;
