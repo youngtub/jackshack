@@ -79,7 +79,7 @@ logoutUser() {
 }
 
 toggleChimney() {
-  $('.smoke').fadeToggle();
+  $('.smoke').fadeToggle(600);
   setTimeout( () => $('.smoke').fadeToggle(2000), 5000)
 }
 
@@ -174,7 +174,7 @@ addToBagCallback() {
         <div classID="home">
           <Home onRef={ref => (this.child = ref)} auth={this.state.isLoggedIn} uid={this.state.uid} addToBagCallback={this.addToBagCallback}/>
         </div>
-
+          <br></br><br></br>
           <img src='https://drive.google.com/uc?id=0BxlVLOVlVGhdcXZ3aENlckphT1U' className='smoke' style={chimneyStyle}></img>
           <img src='https://drive.google.com/uc?id=0BxlVLOVlVGhdQmtXTFVTTEVrN00' className='logo' style={logoStyle}></img>
 
@@ -190,7 +190,7 @@ addToBagCallback() {
 const chimneyStyle = {
   position: "absolute",
   left: "50%",
-  top: "38%",
+  top: "42%",
   opacity: '0.5',
 }
 

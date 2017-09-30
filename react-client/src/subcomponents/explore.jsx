@@ -34,7 +34,7 @@ const Explore = (props) => {
     if (props.search === '') {
       return (item) => {return true}
     } else {
-      return (item) => {return item.title.includes(props.search) || item.tags.join().includes(props.search)}
+      return (item) => {return item.title.toLowerCase().includes(props.search.toLowerCase()) || item.tags.join().toLowerCase().includes(props.search.toLowerCase())}
     }
   }
 
