@@ -16,7 +16,7 @@ const Showcase = (props) => {
   }
 
   return (
-    <div>
+    <div >
     <h2 style={header}>Showcase</h2>
       <div className="showcaseContainer" style={showcaseContainer}>
         {props.items.length ? props.items.map((entry) => (
@@ -34,7 +34,7 @@ const showcaseStyle = {
 }
 
 const header = {
-  textAlign: "center"
+  textAlign: "center",
 }
 
 const showcaseContainer = {

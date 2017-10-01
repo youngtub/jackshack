@@ -36,11 +36,11 @@ this.addToBagCallback = this.addToBagCallback.bind(this);
 
 //functions
 showSignUp() {
-  this.setState({showSignup: true})
+  this.setState({showSignup: true, showLogin: false})
 }
 
 showLogin() {
-  this.setState({showLogin: true})
+  this.setState({showLogin: true, showSignup: false})
 }
 
 showSubmitGraphics() {
@@ -80,7 +80,7 @@ logoutUser() {
 
 toggleChimney() {
   $('.smoke').fadeToggle(600);
-  setTimeout( () => $('.smoke').fadeToggle(2000), 5000)
+  setTimeout( () => $('.smoke').fadeToggle(2000), 4000)
 }
 
 componentDidMount() {

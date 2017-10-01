@@ -24,6 +24,7 @@ class Home extends React.Component {
     this.searchCallback = this.searchCallback.bind(this);
     this.refreshExplore = this.refreshExplore.bind(this);
     this.sortCallback = this.sortCallback.bind(this);
+    this.categoryCallback = this.categoryCallback.bind(this);
     this.userSelectCallback = this.userSelectCallback.bind(this);
     this.fromAllUsers = this.fromAllUsers.bind(this);
   };
@@ -104,7 +105,20 @@ class Home extends React.Component {
     this.setState({
       sort: str
     })
-  }
+  };
+
+  categoryCallback(str) {
+    if (str !== 'All') {
+      var filteredByCategory = this.state.library.filter( (item) => item.tags.join().toLowerCase().includes(str.toLowerCase()) )
+      this.setState({
+        explore: filteredByCategory
+      })
+    } else {
+      this.setState({
+        explore: this.state.library
+      })
+    }
+  };
 
   fromAllUsers() {
     $('#byartist').remove();
@@ -126,7 +140,7 @@ class Home extends React.Component {
     <div classID="explore">
 
       <div classID="search">
-        <Search searchcb={this.searchCallback} sortcb={this.sortCallback}/><br></br>
+        <Search searchcb={this.searchCallback} sortcb={this.sortCallback} categorycb={this.categoryCallback} /><br></br>
       </div>
 
       <button className="backbutton"onClick={this.fromAllUsers} style={backButton}> Back to all artists </button>
