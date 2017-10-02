@@ -94,7 +94,6 @@ submitGraphicsCallback(url) {
   })
   this.child.refreshExplore();
   this.child.previewCallback(url);
-  this.toggleChimney();
 }
 
 addToBagCallback() {
@@ -160,7 +159,7 @@ closeBagCallback() {
         {this.state.showSubmitGraphics ?
           <div>
             <br></br>
-            <SubmitGraphics artist={this.state.uid} style={rightStyle} cb={this.submitGraphicsCallback}/>
+            <SubmitGraphics artist={this.state.uid} cb={this.submitGraphicsCallback} chimney={this.toggleChimney}/>
           </div> : ''
         }
 

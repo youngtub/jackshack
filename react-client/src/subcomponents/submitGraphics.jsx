@@ -38,6 +38,7 @@ class SubmitGraphics extends React.Component {
         tags: this.state.tags
       })
       .then( () => {
+        this.props.toggleChimney();
         this.setState({
           img: '',
           title: '',
@@ -69,7 +70,7 @@ class SubmitGraphics extends React.Component {
   render() {
     return (
 
-      <div classID="submitGraphicsFormContainer" style={rightStyle}>
+      <div classID="submitGraphicsFormContainer" style={submitGraphicsStyle}>
         <input onChange={this.handleUrlChange} type='text' placeholder='Google drive link' value={this.state.img} style={rightStyle}></input><br></br>
         <input onChange={this.handleTitleChange} type='text' placeholder='Title' value={this.state.title} style={rightStyle}></input><br></br>
         <input onChange={this.handleTagsChange} type='text' placeholder='Tags, separated, by, commas' value={this.state.tags} style={rightStyle}></input><br></br>
@@ -85,6 +86,12 @@ const rightStyle = {
   marginLeft: "auto",
   marginRight: "5px",
   float: "right"
+}
+
+const submitGraphicsStyle = {
+  position: "absolute",
+  top: "5%",
+  right: "12%"
 }
 
 const infoStyle = {
