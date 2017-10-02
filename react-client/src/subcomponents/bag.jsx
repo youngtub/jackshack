@@ -3,7 +3,7 @@ import React from 'react';
 const Bag = (props) => {
 
   return (
-    <div className="bagContainer" style={rightAlign}>
+    <div className="bagContainer" style={bagContainerStyle}>
       {props.bagItems.length ? props.bagItems.map( (item) => (
         <div className="bagItem" style={bagItem}>
           <a> "{item.graphicTitle}" </a>
@@ -15,31 +15,38 @@ const Bag = (props) => {
       )) : ''}
       <div style={checkoutButton}>
         <button style={checkoutButtonStyle}> Checkout </button>
+        <button style={checkoutButtonStyle} onClick={props.close}> Close Bag </button>
       </div>
     </div>
   )
 };
 
-const rightAlign = {
-  float: "right",
+const bagContainerStyle = {
   textAlign: "right",
-  backgroundColor: "white"
+  position: "absolute",
+  left: "79%",
+  width: "20%",
+  zIndex: "3",
 }
 
 const bagItem = {
   border: "solid black 1px",
   borderRadius: "10px",
   display: "inline block",
-  padding: "5px"
+  padding: "5px",
+  backgroundColor: "white",
 }
 
 const checkoutButton = {
   textAlign: "center",
-  backgroundColor: "#eaecef"
+  backgroundColor: "transparent",
+  borderRadius: "75px"
 }
 
 const checkoutButtonStyle = {
-  height: "40px"
+  height: "40px",
+  fontSize: "14px",
+  backgroundColor: "#9db5db"
 }
 
 export default Bag;

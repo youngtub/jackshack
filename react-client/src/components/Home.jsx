@@ -150,7 +150,7 @@ class Home extends React.Component {
     </div>
 
     <div classID="preview">
-      <Preview details={this.state.preview} userselectcb={this.userSelectCallback} refresh={this.previewCallback} auth={this.props.auth} uid={this.props.uid} addToBagCallback={this.props.addToBagCallback}/>
+      <Preview details={this.state.preview} userselectcb={this.userSelectCallback} refresh={this.previewCallback} auth={this.props.auth} uid={this.props.uid} addToBagCallback={this.props.addToBagCallback} toggleChimney={this.props.toggleChimney}/>
     </div>
 
   </div>

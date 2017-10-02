@@ -36,6 +36,7 @@ class Preview extends React.Component {
       })
       .then( () => {
         this.props.refresh(this.props.details[1])
+        this.props.toggleChimney()
       })
     } else {
       var alertMessage = `<p id='loginAlert' style="text-align: center; color: red; font-weight: bold"> Please Log in/Sign up to rate! [Click to hide]</p> `
@@ -104,7 +105,7 @@ class Preview extends React.Component {
   render() {
     return (
       <div style={boxStyle} className="previewContainer">
-        <h3 style={alignDescription}> Preview shirt </h3>
+        <h3 style={alignDescription}> Preview Shirt </h3>
 
         <div style={alignDescription}>
           <select onChange={this.handleShirtColorChange} style={alignColorSelect}>
@@ -122,6 +123,8 @@ class Preview extends React.Component {
         <div style={divStyle}>
           <img src="https://teemill.com/uploaded/public/58344ea7d34955.11549832.png" height={500} width={400} className="shirtColor"/>
           <img src={`https://drive.google.com/uc?id=${this.props.details[1].slice(33)}`} height={100} width={100} style={overlayStyle} />
+
+            <div className="allDetails" >
 
             <p style={titleStyle}> "{this.props.details[0]}"</p>
 
@@ -152,6 +155,8 @@ class Preview extends React.Component {
             <div className="orderForm">
             {this.state.showOrderForm ?
               <Order color={this.state.color} cancelCb={this.cancelOrderCallback} size={this.state.size} sizecb={this.orderSelectSizeCb} uid={this.props.uid} graphicId={this.props.details[6]} addToBagCallback={this.props.addToBagCallback} artistId={this.props.details[8]} ordered={this.completeAddToBagCallback}/> : ''}
+            </div>
+
             </div>
 
           </div>

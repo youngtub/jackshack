@@ -34,7 +34,7 @@ class Search extends React.Component {
 
 render() {
     return (
-      <div className="searchContainer">
+      <div className="searchContainer" >
         <input type="text" onChange={this.handleSearchChange} value={this.state.search} placeholder='Search...' style={searchStyle}/>
 
           <a style={sortBy}> Category: </a>

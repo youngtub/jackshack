@@ -31,7 +31,8 @@ this.signupCallback = this.signupCallback.bind(this);
 this.loginCallback = this.loginCallback.bind(this);
 this.submitGraphicsCallback = this.submitGraphicsCallback.bind(this);
 this.addToBagCallback = this.addToBagCallback.bind(this);
-// this.toggleChimney = this.toggleChimney.bind(this);
+this.toggleChimney = this.toggleChimney.bind(this);
+this.closeBagCallback = this.closeBagCallback.bind(this);
   }
 
 //functions
@@ -80,7 +81,7 @@ logoutUser() {
 
 toggleChimney() {
   $('.smoke').fadeToggle(600);
-  setTimeout( () => $('.smoke').fadeToggle(2000), 4000)
+  setTimeout( () => $('.smoke').fadeToggle(2000), 3000)
 }
 
 componentDidMount() {
@@ -120,11 +121,12 @@ addToBagCallback() {
     })
   })
   this.toggleChimney();
-  // .then( () => {
-  //   this.setState({
-  //     bag: newBag
-  //   }, () => console.log('NEW STATE: ', this.state.bag))
-  // })
+};
+
+closeBagCallback() {
+  this.setState({
+    showBag: false
+  })
 }
 
   render() {
@@ -136,7 +138,7 @@ addToBagCallback() {
           <button onClick={this.showSignUp} style={buttonStyle}>Sign up</button>
           <button onClick={this.showLogin} style={buttonStyle}>Log in</button>
         </div> }
-        <br></br><br></br>
+
         {this.state.showSignup ?
           <Signup cb={this.signupCallback} style={rightStyle}/> : ''
         }
@@ -166,13 +168,13 @@ addToBagCallback() {
 
         {this.state.showBag ?
           <div>
-            <br></br><br></br><br></br><br></br><br></br>
-            <Bag bagItems={this.state.bag} />
+
+            <Bag bagItems={this.state.bag} close={this.closeBagCallback} />
           </div> : '' }
 
 
         <div classID="home">
-          <Home onRef={ref => (this.child = ref)} auth={this.state.isLoggedIn} uid={this.state.uid} addToBagCallback={this.addToBagCallback}/>
+          <Home onRef={ref => (this.child = ref)} auth={this.state.isLoggedIn} uid={this.state.uid} addToBagCallback={this.addToBagCallback} toggleChimney={this.toggleChimney}/>
         </div>
           <br></br><br></br>
           <img src='https://drive.google.com/uc?id=0BxlVLOVlVGhdcXZ3aENlckphT1U' className='smoke' style={chimneyStyle}></img>
@@ -190,7 +192,7 @@ addToBagCallback() {
 const chimneyStyle = {
   position: "absolute",
   left: "50%",
-  top: "42%",
+  top: "38%",
   opacity: '0.5',
 }
 
@@ -201,7 +203,10 @@ const logoStyle = {
 }
 
 const rightStyle = {
-  float: "right"
+  // float: "right",
+  position: "absolute",
+  top: "1%",
+  left: "88%"
 }
 
 const textAlign = {
@@ -219,7 +224,7 @@ const buttonStyle = {
 }
 
 const submitGraphicsButtonStyle = {
-  backgroundColor: "#6485ba",
+  backgroundColor: "#7d98c4",
   color: 'black',
   width: '180px',
   padding: '5px',
