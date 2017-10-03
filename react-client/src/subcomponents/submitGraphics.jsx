@@ -38,7 +38,6 @@ class SubmitGraphics extends React.Component {
         tags: this.state.tags
       })
       .then( () => {
-        this.props.chimney();
         this.setState({
           img: '',
           title: '',
