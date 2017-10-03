@@ -94,7 +94,7 @@ submitGraphicsCallback(url) {
   })
   this.child.refreshExplore();
   this.child.previewCallback(url);
-  this.toggleChimney();
+  this.toggleChimney(); 
 }
 
 addToBagCallback() {
